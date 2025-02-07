@@ -36,19 +36,19 @@ int main(int argc, char *argv[]) {
                 printf("KW_RETURN: %d\n", token);
                 break;
             case TK_IDENTIFIER:
-                printf("TK_IDENTIFIER\n");
+                printf("TK_IDENTIFIER: %d\n", token);
                 break;
             case LIT_INT:
-                printf("LIT_INT\n");
+                printf("LIT_INT: %d\n", token);
                 break;
             case LIT_CHAR:
-                printf("LIT_CHAR\n");
+                printf("LIT_CHAR: %d\n", token);
                 break;
             case LIT_STRING:
-                printf("LIT_STRING\n");
+                printf("LIT_STRING: %d\n", token);
                 break;
             case TOKEN_ERROR:
-                printf("TOKEN_ERROR\n");
+                printf("TOKEN_ERROR: %d\n", token);
                 break;
             case ',':
                 printf("COMMA\n");
