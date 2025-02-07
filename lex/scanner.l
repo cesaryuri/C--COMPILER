@@ -5,7 +5,15 @@
 
 %option noyywrap
 
+
 %% 
+
+NUM     [0-9]
+LETRA   [a-zA-Z]
+INT     \#{NUM}+
+CHAR    \'({LETRA}|{NUM})\'
+STRING  \"({LETRA}|{NUM})+\"
+
 
 char    { return KW_CHAR; }
 int     { return KW_INT; }
