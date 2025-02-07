@@ -9,31 +9,31 @@ int main(int argc, char *argv[]) {
     while ((token = yylex()) != EOF) {
         switch (token) {
             case KW_CHAR:
-                printf("KW_CHAR\n");
+                printf("KW_CHAR: %d\n", token);
                 break;
             case KW_INT:
-                printf("KW_INT\n");
+                printf("KW_INT: %d\n", token);
                 break;
             case KW_IF:
-                printf("KW_IF\n");
+                printf("KW_IF: %d\n", token);
                 break;
             case KW_THEN:
-                printf("KW_THEN\n");
+                printf("KW_THEN: %d\n", token);
                 break;
             case KW_ELSE:
-                printf("KW_ELSE\n");
+                printf("KW_ELSE: %d\n", token);
                 break;
             case KW_WHILE:
-                printf("KW_WHILE\n");
+                printf("KW_WHILE: %d\n", token);
                 break;
             case KW_READ:
-                printf("KW_READ\n");
+                printf("KW_READ: %d\n", token);
                 break;
             case KW_PRINT:
-                printf("KW_PRINT\n");
+                printf("KW_PRINT: %d\n", token);
                 break;
             case KW_RETURN:
-                printf("KW_RETURN\n");
+                printf("KW_RETURN: %d\n", token);
                 break;
             case TK_IDENTIFIER:
                 printf("TK_IDENTIFIER\n");
