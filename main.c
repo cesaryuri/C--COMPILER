@@ -135,6 +135,9 @@ int main(int argc, char *argv[]) {
             case 292:    
                 printf("Comentario do tipo /**... **/ ==>  %d\n", token);
                 break;
+            case 293:
+                printf("Palavra reservada: %d\n", token);
+                break;
             default:
                 printf("Token desconhecido\n");
                 break;

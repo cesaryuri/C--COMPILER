@@ -16,7 +16,7 @@ LETRA           [a-zA-Z]
 INT             [#]{NUM}+
 CHAR            [']{ALLCHAR}[']
 STRING          ["]{ALLCHAR}+["]
-IDENTIFIER      [a-zA-Z]*[0-9]*
+IDENTIFIER      [a-zA-Z]*[LETRA0-9]*
 
 
 %% 
@@ -29,7 +29,7 @@ while   { return KW_WHILE; }
 read    { return KW_READ; }
 print   { return KW_PRINT; }
 return  { return KW_RETURN; }
-main    { printf("Palavra reservada: %s\n", yytext);}
+main    { return 293;}
 
 {INT}           {return LIT_INT;}
 {CHAR}          {return LIT_CHAR;}
