@@ -5,6 +5,7 @@
 extern int yylex();
 
 int main(int argc, char *argv[]) {
+    // Chama a função yylex até que retorne EOF
     int token;
     while ((token = yylex()) != EOF) {
         switch (token) {

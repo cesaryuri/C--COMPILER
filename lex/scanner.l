@@ -1,6 +1,7 @@
 %{
 #include <stdio.h>
 #include "token.h"
+int linecount = 0;
 %}
 
 %option noyywrap 
@@ -15,11 +16,15 @@ CHAR            [']{ALLCHAR}[']
 STRING          ["]{ALLCHAR}+["]
 IDENTIFIER      [a-zA-Z]*[0-9]*
 COMMENTS  ([//]{ALLCHAR}+)|([/**]{ALLCHAR}+[**/])
-
+IDFLINE     [\n][[:space:]]+
 
 
 
 %% 
+{IDFLINE} {
+    //identificador de linhas  int getLineNumber(void)
+    linecount++;}
+
 
 char    { return KW_CHAR; }
 int     { return KW_INT; }
@@ -32,11 +37,13 @@ print   { return KW_PRINT; }
 return  { return KW_RETURN; }
 main    { printf("Palavra reservada: %s\n", yytext);}
 
+
 {INT}           {return LIT_INT;}
 {CHAR}          {return LIT_CHAR;}
 {STRING}        {return LIT_STRING;}
 {ESPECIALCHAR}  {return yytext[0];}
 {IDENTIFIER}    {return TK_IDENTIFIER;}
+
 
 
 "//".*         { printf("Comentario do tipo // ==>  %s\n", yytext); }
@@ -53,6 +60,13 @@ main    { printf("Palavra reservada: %s\n", yytext);}
 
 [[:space:]]+    {/* Ignorar espaços em branco */}
 .               { return TOKEN_ERROR; }
+
+
+"int getLineNumber(void)" {//exibir linhas
+
+    printf("Quantidade de linhas: %d\n", linecount);
+    linecount = 0;
+}
 
 
 %%

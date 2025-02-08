@@ -14,7 +14,6 @@ de multiplas
 linhas
 **/
 
-
 int main ()
   {
   number = 0;
