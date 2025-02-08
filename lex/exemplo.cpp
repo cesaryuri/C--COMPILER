@@ -50,4 +50,3 @@ int main ()
   {{}} {}
   }
 // end of file
-  

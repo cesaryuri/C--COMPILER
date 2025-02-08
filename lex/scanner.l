@@ -1,9 +1,12 @@
 %{
 #include <stdio.h>
 #include "token.h"
+
 %}
 
 %option noyywrap 
+%option yylineno
+
 
 ESPECIALCHAR [";:()\[\]{}=+\-*/%<>&|~"]
 
@@ -14,13 +17,9 @@ INT             [#]{NUM}+
 CHAR            [']{ALLCHAR}[']
 STRING          ["]{ALLCHAR}+["]
 IDENTIFIER      [a-zA-Z]*[0-9]*
-COMMENTS  ([//]{ALLCHAR}+)|([/**]{ALLCHAR}+[**/])
-
-
 
 
 %% 
-
 char    { return KW_CHAR; }
 int     { return KW_INT; }
 if      { return KW_IF; }
@@ -39,7 +38,9 @@ main    { printf("Palavra reservada: %s\n", yytext);}
 {IDENTIFIER}    {return TK_IDENTIFIER;}
 
 
-"//".*         { printf("Comentario do tipo // ==>  %s\n", yytext); }
+"//".*      { 
+              return 291;  
+            }
 
 "/**"   { // reconhecer comentario
             while (1) {
@@ -47,12 +48,11 @@ main    { printf("Palavra reservada: %s\n", yytext);}
                 if (c == '*' && input() == '*' && input() == '/') break;
                 if (c == 0) break; // EOF
             }
-            printf("Comentario do tipo /**...**/ \n");
+            return 292;
         }
 
 
 [[:space:]]+    {/* Ignorar espaços em branco */}
 .               { return TOKEN_ERROR; }
-
 
 %%
