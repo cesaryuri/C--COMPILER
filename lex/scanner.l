@@ -40,10 +40,18 @@ main    { printf("Palavra reservada: %s\n", yytext);}
 
 
 "//".*         { printf("Comentario do tipo // ==>  %s\n", yytext); }
-"/**"(.)*?"**/"      {printf("Comentario do tipo /****/ ==>  %s\n", yytext);}
+
+"/**"   { // reconhecer comentario
+            while (1) {
+                int c = input();
+                if (c == '*' && input() == '*' && input() == '/') break;
+                if (c == 0) break; // EOF
+            }
+            printf("Comentario do tipo /**...**/ \n");
+        }
 
 
-[ \t\n\r]+      {/* Ignorar espaços em branco */}
+[[:space:]]+    {/* Ignorar espaços em branco */}
 .               { return TOKEN_ERROR; }
 
 
