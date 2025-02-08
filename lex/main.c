@@ -51,64 +51,64 @@ int main(int argc, char *argv[]) {
                 printf("TOKEN_ERROR: %d\n", token);
                 break;
             case ',':
-                printf("COMMA\n");
+                printf("COMMA: %d\n", token);
                 break;
             case ';':
-                printf("SEMICOLON\n");
+                printf("SEMICOLON: %d\n", token);
                 break;
             case ':':
-                printf("COLON\n");
+                printf("COLON: %d\n", token);
                 break;
             case '(':
-                printf("LEFT_PAREN\n");
+                printf("LEFT_PAREN: %d\n", token);
                 break;
             case ')':
-                printf("RIGHT_PAREN\n");
+                printf("RIGHT_PAREN: %d\n", token);
                 break;
             case '[':
-                printf("LEFT_BRACKET\n");
+                printf("LEFT_BRACKET: %d\n", token);
                 break;
             case ']':
-                printf("RIGHT_BRACKET\n");
+                printf("RIGHT_BRACKET: %d\n", token);
                 break;
             case '{':
-                printf("LEFT_BRACE\n");
+                printf("LEFT_BRACE: %d\n", token);
                 break;
             case '}':
-                printf("RIGHT_BRACE\n");
+                printf("RIGHT_BRACE: %d\n", token);
                 break;
             case '=':
-                printf("EQUAL\n");
+                printf("EQUAL: %d\n", token);
                 break;
             case '+':
-                printf("PLUS\n");
+                printf("PLUS: %d\n", token);
                 break;
             case '-':
-                printf("MINUS\n");
+                printf("MINUS: %d\n", token);
                 break;
             case '*':
-                printf("MULTIPLY\n");
+                printf("MULTIPLY: %d\n", token);
                 break;
             case '/':
-                printf("DIVIDE\n");
+                printf("DIVIDE: %d\n", token);
                 break;
             case '%':
-                printf("MODULO\n");
+                printf("MODULO: %d\n", token);
                 break;
             case '<':
-                printf("LESS_THAN\n");
+                printf("LESS_THAN: %d\n", token);
                 break;
             case '>':
-                printf("GREATER_THAN\n");
+                printf("GREATER_THAN: %d\n", token);
                 break;
             case '&':
-                printf("AMPERSAND\n");
+                printf("AMPERSAND: %d\n", token);
                 break;
             case '|':
-                printf("PIPE\n");
+                printf("PIPE: %d\n", token);
                 break;
             case '~':
-                printf("TILDE\n");
+                printf("TILDE: %d\n", token);
                 break;
             default:
                 printf("Token desconhecido\n");

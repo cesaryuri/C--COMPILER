@@ -8,12 +8,15 @@
 ESPECIALCHAR [";:()\[\]{}=+\-*/%<>&|~"]
 
 ALLCHAR (.)
-NUM     [0-9]
-LETRA   [a-zA-Z]
-INT     [#]{NUM}+
-CHAR    [']{ALLCHAR}[']
-STRING   ["]{ALLCHAR}+["]
-IDENTIFIER [a-zA-Z]*[0-9]*
+NUM             [0-9]
+LETRA           [a-zA-Z]
+INT             [#]{NUM}+
+CHAR            [']{ALLCHAR}[']
+STRING          ["]{ALLCHAR}+["]
+IDENTIFIER      [a-zA-Z]*[0-9]*
+COMMENTS  ([//]{ALLCHAR}+)|([/**]{ALLCHAR}+[**/])
+
+
 
 
 %% 
@@ -27,7 +30,7 @@ while   { return KW_WHILE; }
 read    { return KW_READ; }
 print   { return KW_PRINT; }
 return  { return KW_RETURN; }
-main    { printf("Palavra reservada de tipo %s\n", yytext); }
+main    { printf("Palavra reservada: %s\n", yytext);}
 
 {INT}           {return LIT_INT;}
 {CHAR}          {return LIT_CHAR;}
@@ -35,8 +38,13 @@ main    { printf("Palavra reservada de tipo %s\n", yytext); }
 {ESPECIALCHAR}  {return yytext[0];}
 {IDENTIFIER}    {return TK_IDENTIFIER;}
 
-[ \t\n\r]+      {/* Ignorar espaços em branco */}
 
+"//".*         { printf("Comentario do tipo // ==>  %s\n", yytext); }
+"/**"(.)*?"**/"      {printf("Comentario do tipo /****/ ==>  %s\n", yytext);}
+
+
+[ \t\n\r]+      {/* Ignorar espaços em branco */}
 .               { return TOKEN_ERROR; }
+
 
 %%
