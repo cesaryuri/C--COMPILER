@@ -14,7 +14,6 @@ de multiplas
 linhas
 **/
 
-
 int main ()
   {
   number = 0;
@@ -50,3 +49,4 @@ int main ()
   {{}} {}
   }
 // end of file
+  

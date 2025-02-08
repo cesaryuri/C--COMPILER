@@ -23,17 +23,9 @@ int isRunning(void){
 
 int main(int argc, char *argv[]) {
     int token;
-    int nl = 0;
 
-
-    // Faz o loop enquanto o lexer ainda não atingir EOF
-    do {  
-        token = yylex();  // Obtém o próximo token
-        
-        // Atualiza o número de linhas
-        getLineNumber();  
-        isRunning();
-        // Processa o token conforme o tipo
+    while ((token = yylex()) != EOF) {    
+       
         switch (token) {
             case KW_CHAR:
                 printf("KW_CHAR: %d\n", token);
@@ -147,12 +139,11 @@ int main(int argc, char *argv[]) {
                 printf("Token desconhecido\n");
                 break;
         }
-        
-         
-    } while (isrunningstatus);
 
-    // Mensagem final
-    printf("Processamento finalizado.\n");
+
+        getLineNumber();
+    }
+    
 
     return 0;
 }
