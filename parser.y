@@ -1,3 +1,5 @@
+//com recuperacao de erros
+
 %{
 #include <stdio.h>
 #include "parser.tab.h"
@@ -6,6 +8,8 @@
 void yyerror(const char *s);
 int yylex(void);
 extern int yylineno;  // Importa yylineno do lexer
+
+int error_count = 0; // Contador de erros
 %}
 
 %token KW_CHAR
@@ -36,6 +40,7 @@ extern int yylineno;  // Importa yylineno do lexer
 %left '{' '}'
 %left '(' ')'
 %left '"' 
+
 %%
 
 program:
@@ -50,13 +55,14 @@ LISTA_COMANDOS:
 COMANDO:
     CMD_IF
     | CMD_WHILE
-    | CMD_PRINT ';' 
-    | CMD_READ ';' 
-    | CMD_FUNC 
-    | ATT_ID ';' 
-    | DECL ';' 
+    | CMD_PRINT ';'
+    | CMD_READ ';'
+    | CMD_FUNC
+    | ATT_ID ';'
+    | DECL ';'
     | FUNC_DECL
     | COMENT
+    | error ';' // Sinc
     ;
 
 CMD_IF:
@@ -74,8 +80,8 @@ CMD_FUNC:
     ;
 
 FUNC_DECL:
-    TIPO TK_IDENTIFIER '(' LISTA_DECL ')' BLOCO 
-    | KW_INT KW_MAIN '(' LISTA_DECL ')' BLOCO 
+    TIPO TK_IDENTIFIER '(' LISTA_DECL ')' BLOCO
+    | KW_INT KW_MAIN '(' LISTA_DECL ')' BLOCO
     ;
 
 CMD_PRINT:
@@ -89,6 +95,7 @@ CMD_READ:
 COMENT:
     TK_SCOMENT
     | TK_MCOMENT
+    ;
 
 ATT_ID:
     TK_IDENTIFIER '=' E
@@ -127,6 +134,7 @@ E:  E '>' E
     | E "&&" E
     | "~" E
     | T
+    | error // Sinc
     ;
 
 T:
@@ -141,7 +149,7 @@ F:
     | LIT_STRING
     | TK_IDENTIFIER
     | '(' E ')'
-    |'(' E '=' E ')'
+    | '(' E '=' E ')'
     | TK_IDENTIFIER '[' E ']'
     ;
 
@@ -154,10 +162,11 @@ TIPO:
 
 int main(int argc, char **argv) {
     yyparse();
-    printf("Análise concluída com sucesso!\n");
+    printf("Analise concluida com %d erros.\n", error_count);
     return 0;
 }
 
 void yyerror(const char *s) {
-    fprintf(stderr, "Erro de sintaxe na linha %d: %s\n", yylineno , s);
+    error_count++;
+    fprintf(stderr, "Erro de sintaxe na linha %d: %s\n", yylineno, s);
 }
