@@ -451,7 +451,7 @@ char *yytext;
 #define INITIAL 0
 #line 2 "scanner.l"
 #include <stdio.h>
-#include "token.h"
+#include "parser.tab.h"
 
 #line 457 "lex.yy.c"
 
@@ -745,7 +745,7 @@ YY_RULE_SETUP
 case 10:
 YY_RULE_SETUP
 #line 32 "scanner.l"
-{ return 293;}
+{ return KW_MAIN;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
@@ -776,7 +776,7 @@ case 16:
 YY_RULE_SETUP
 #line 41 "scanner.l"
 { 
-              return 291;  
+              return TK_SCOMENT;  
             }
 	YY_BREAK
 case 17:
@@ -788,7 +788,7 @@ YY_RULE_SETUP
                 if (c == '*' && input() == '*' && input() == '/') break;
                 if (c == 0) break; // EOF
             }
-            return 292;
+            return TK_MCOMENT;
         }
 	YY_BREAK
 case 18:
@@ -799,7 +799,7 @@ YY_RULE_SETUP
 case 19:
 YY_RULE_SETUP
 #line 56 "scanner.l"
-{ return TOKEN_ERROR; }
+{ return TK_ERROR; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP

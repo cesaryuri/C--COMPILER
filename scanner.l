@@ -1,6 +1,6 @@
 %{
 #include <stdio.h>
-#include "token.h"
+#include "parser.tab.h"
 
 %}
 
@@ -29,7 +29,7 @@ while   { return KW_WHILE; }
 read    { return KW_READ; }
 print   { return KW_PRINT; }
 return  { return KW_RETURN; }
-main    { return 293;}
+main    { return KW_MAIN;}
 
 {INT}           {return LIT_INT;}
 {CHAR}          {return LIT_CHAR;}
@@ -39,7 +39,7 @@ main    { return 293;}
 
 
 "//".*      { 
-              return 291;  
+              return TK_SCOMENT;  
             }
 
 "/**"   { // reconhecer comentario
@@ -48,11 +48,11 @@ main    { return 293;}
                 if (c == '*' && input() == '*' && input() == '/') break;
                 if (c == 0) break; // EOF
             }
-            return 292;
+            return TK_MCOMENT;
         }
 
 
 [[:space:]]+    {/* Ignorar espaços em branco */}
-.               { return TOKEN_ERROR; }
+.               { return TK_ERROR; }
 
 %%

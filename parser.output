@@ -1,0 +1,1701 @@
+Terminals unused in grammar
+
+   KW_RETURN
+   TK_ERROR
+   '"'
+
+
+Grammar
+
+    0 $accept: program $end
+
+    1 program: LISTA_COMANDOS
+
+    2 LISTA_COMANDOS: LISTA_COMANDOS COMANDO
+    3               | /* empty */
+
+    4 COMANDO: CMD_IF
+    5        | CMD_WHILE
+    6        | CMD_PRINT ';'
+    7        | CMD_READ ';'
+    8        | CMD_FUNC
+    9        | ATT_ID ';'
+   10        | DECL ';'
+   11        | BLOCO
+   12        | FUNC_DECL
+   13        | COMENT
+   14        | error ';'
+
+   15 CMD_IF: KW_IF E KW_THEN BLOCO
+   16       | KW_IF E KW_THEN BLOCO KW_ELSE BLOCO
+
+   17 CMD_WHILE: KW_WHILE E BLOCO
+
+   18 CMD_FUNC: TIPO TK_IDENTIFIER '(' LISTA_E ')' BLOCO
+   19         | TK_IDENTIFIER '(' ')' BLOCO
+
+   20 FUNC_DECL: TIPO TK_IDENTIFIER '(' LISTA_DECL ')' BLOCO
+   21          | KW_INT KW_MAIN '(' LISTA_DECL ')' BLOCO
+
+   22 CMD_PRINT: KW_PRINT LIT_STRING
+
+   23 CMD_READ: KW_READ TK_IDENTIFIER
+
+   24 COMENT: TK_SCOMENT
+   25       | TK_MCOMENT
+
+   26 ATT_ID: TK_IDENTIFIER '=' E
+   27       | TK_IDENTIFIER '[' E ']' '=' E
+
+   28 DECL: TIPO TK_IDENTIFIER
+   29     | TIPO TK_IDENTIFIER '=' E
+   30     | TIPO TK_IDENTIFIER '[' E ']'
+   31     | TIPO TK_IDENTIFIER '[' E ']' '=' '{' LISTA_E '}'
+
+   32 LISTA_E: E
+   33        | E ',' LISTA_E
+
+   34 LISTA_DECL: TIPO TK_IDENTIFIER ',' LISTA_DECL
+   35           | TIPO TK_IDENTIFIER
+   36           | /* empty */
+
+   37 BLOCO: '{' LISTA_COMANDOS '}'
+
+   38 E: E '>' E
+   39  | E '<' E
+   40  | E '+' E
+   41  | E '-' E
+   42  | E '*' E
+   43  | E '/' E
+   44  | E "||" E
+   45  | E "&&" E
+   46  | "~" E
+   47  | T
+   48  | error
+
+   49 T: "true"
+   50  | "false"
+   51  | F
+
+   52 F: LIT_INT
+   53  | LIT_CHAR
+   54  | LIT_STRING
+   55  | TK_IDENTIFIER
+   56  | '(' E ')'
+   57  | '(' E '=' E ')'
+   58  | TK_IDENTIFIER '[' E ']'
+
+   59 TIPO: KW_INT
+   60     | KW_CHAR
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+'"' (34)
+'(' (40) 18 19 20 21 56 57
+')' (41) 18 19 20 21 56 57
+'*' (42) 42
+'+' (43) 40
+',' (44) 33 34
+'-' (45) 41
+'/' (47) 43
+';' (59) 6 7 9 10 14
+'<' (60) 39
+'=' (61) 26 27 29 31 57
+'>' (62) 38
+'[' (91) 27 30 31 58
+']' (93) 27 30 31 58
+'{' (123) 31 37
+'}' (125) 31 37
+error (256) 14 48
+KW_CHAR (258) 60
+KW_INT (259) 21 59
+KW_IF (260) 15 16
+KW_THEN (261) 15 16
+KW_ELSE (262) 16
+KW_WHILE (263) 17
+KW_READ (264) 23
+KW_PRINT (265) 22
+KW_RETURN (266)
+KW_MAIN (267) 21
+TK_IDENTIFIER (268) 18 19 20 23 26 27 28 29 30 31 34 35 55 58
+LIT_INT (269) 52
+LIT_CHAR (270) 53
+LIT_STRING (271) 22 54
+TK_ERROR (272)
+TK_SCOMENT (273) 24
+TK_MCOMENT (274) 25
+"||" (275) 44
+"&&" (276) 45
+"~" (277) 46
+"true" (278) 49
+"false" (279) 50
+
+
+Nonterminals, with rules where they appear
+
+$accept (41)
+    on left: 0
+program (42)
+    on left: 1, on right: 0
+LISTA_COMANDOS (43)
+    on left: 2 3, on right: 1 2 37
+COMANDO (44)
+    on left: 4 5 6 7 8 9 10 11 12 13 14, on right: 2
+CMD_IF (45)
+    on left: 15 16, on right: 4
+CMD_WHILE (46)
+    on left: 17, on right: 5
+CMD_FUNC (47)
+    on left: 18 19, on right: 8
+FUNC_DECL (48)
+    on left: 20 21, on right: 12
+CMD_PRINT (49)
+    on left: 22, on right: 6
+CMD_READ (50)
+    on left: 23, on right: 7
+COMENT (51)
+    on left: 24 25, on right: 13
+ATT_ID (52)
+    on left: 26 27, on right: 9
+DECL (53)
+    on left: 28 29 30 31, on right: 10
+LISTA_E (54)
+    on left: 32 33, on right: 18 31 33
+LISTA_DECL (55)
+    on left: 34 35 36, on right: 20 21 34
+BLOCO (56)
+    on left: 37, on right: 11 15 16 17 18 19 20 21
+E (57)
+    on left: 38 39 40 41 42 43 44 45 46 47 48, on right: 15 16 17 26
+    27 29 30 31 32 33 38 39 40 41 42 43 44 45 46 56 57 58
+T (58)
+    on left: 49 50 51, on right: 47
+F (59)
+    on left: 52 53 54 55 56 57 58, on right: 51
+TIPO (60)
+    on left: 59 60, on right: 18 20 28 29 30 31 34 35
+
+
+state 0
+
+    0 $accept: . program $end
+
+    $default  reduce using rule 3 (LISTA_COMANDOS)
+
+    program         go to state 1
+    LISTA_COMANDOS  go to state 2
+
+
+state 1
+
+    0 $accept: program . $end
+
+    $end  shift, and go to state 3
+
+
+state 2
+
+    1 program: LISTA_COMANDOS .
+    2 LISTA_COMANDOS: LISTA_COMANDOS . COMANDO
+
+    error          shift, and go to state 4
+    KW_CHAR        shift, and go to state 5
+    KW_INT         shift, and go to state 6
+    KW_IF          shift, and go to state 7
+    KW_WHILE       shift, and go to state 8
+    KW_READ        shift, and go to state 9
+    KW_PRINT       shift, and go to state 10
+    TK_IDENTIFIER  shift, and go to state 11
+    TK_SCOMENT     shift, and go to state 12
+    TK_MCOMENT     shift, and go to state 13
+    '{'            shift, and go to state 14
+
+    $end  reduce using rule 1 (program)
+
+    COMANDO    go to state 15
+    CMD_IF     go to state 16
+    CMD_WHILE  go to state 17
+    CMD_FUNC   go to state 18
+    FUNC_DECL  go to state 19
+    CMD_PRINT  go to state 20
+    CMD_READ   go to state 21
+    COMENT     go to state 22
+    ATT_ID     go to state 23
+    DECL       go to state 24
+    BLOCO      go to state 25
+    TIPO       go to state 26
+
+
+state 3
+
+    0 $accept: program $end .
+
+    $default  accept
+
+
+state 4
+
+   14 COMANDO: error . ';'
+
+    ';'  shift, and go to state 27
+
+
+state 5
+
+   60 TIPO: KW_CHAR .
+
+    $default  reduce using rule 60 (TIPO)
+
+
+state 6
+
+   21 FUNC_DECL: KW_INT . KW_MAIN '(' LISTA_DECL ')' BLOCO
+   59 TIPO: KW_INT .
+
+    KW_MAIN  shift, and go to state 28
+
+    $default  reduce using rule 59 (TIPO)
+
+
+state 7
+
+   15 CMD_IF: KW_IF . E KW_THEN BLOCO
+   16       | KW_IF . E KW_THEN BLOCO KW_ELSE BLOCO
+
+    error          shift, and go to state 29
+    TK_IDENTIFIER  shift, and go to state 30
+    LIT_INT        shift, and go to state 31
+    LIT_CHAR       shift, and go to state 32
+    LIT_STRING     shift, and go to state 33
+    "~"            shift, and go to state 34
+    '('            shift, and go to state 35
+    "true"         shift, and go to state 36
+    "false"        shift, and go to state 37
+
+    E  go to state 38
+    T  go to state 39
+    F  go to state 40
+
+
+state 8
+
+   17 CMD_WHILE: KW_WHILE . E BLOCO
+
+    error          shift, and go to state 29
+    TK_IDENTIFIER  shift, and go to state 30
+    LIT_INT        shift, and go to state 31
+    LIT_CHAR       shift, and go to state 32
+    LIT_STRING     shift, and go to state 33
+    "~"            shift, and go to state 34
+    '('            shift, and go to state 35
+    "true"         shift, and go to state 36
+    "false"        shift, and go to state 37
+
+    E  go to state 41
+    T  go to state 39
+    F  go to state 40
+
+
+state 9
+
+   23 CMD_READ: KW_READ . TK_IDENTIFIER
+
+    TK_IDENTIFIER  shift, and go to state 42
+
+
+state 10
+
+   22 CMD_PRINT: KW_PRINT . LIT_STRING
+
+    LIT_STRING  shift, and go to state 43
+
+
+state 11
+
+   19 CMD_FUNC: TK_IDENTIFIER . '(' ')' BLOCO
+   26 ATT_ID: TK_IDENTIFIER . '=' E
+   27       | TK_IDENTIFIER . '[' E ']' '=' E
+
+    '['  shift, and go to state 44
+    '('  shift, and go to state 45
+    '='  shift, and go to state 46
+
+
+state 12
+
+   24 COMENT: TK_SCOMENT .
+
+    $default  reduce using rule 24 (COMENT)
+
+
+state 13
+
+   25 COMENT: TK_MCOMENT .
+
+    $default  reduce using rule 25 (COMENT)
+
+
+state 14
+
+   37 BLOCO: '{' . LISTA_COMANDOS '}'
+
+    $default  reduce using rule 3 (LISTA_COMANDOS)
+
+    LISTA_COMANDOS  go to state 47
+
+
+state 15
+
+    2 LISTA_COMANDOS: LISTA_COMANDOS COMANDO .
+
+    $default  reduce using rule 2 (LISTA_COMANDOS)
+
+
+state 16
+
+    4 COMANDO: CMD_IF .
+
+    $default  reduce using rule 4 (COMANDO)
+
+
+state 17
+
+    5 COMANDO: CMD_WHILE .
+
+    $default  reduce using rule 5 (COMANDO)
+
+
+state 18
+
+    8 COMANDO: CMD_FUNC .
+
+    $default  reduce using rule 8 (COMANDO)
+
+
+state 19
+
+   12 COMANDO: FUNC_DECL .
+
+    $default  reduce using rule 12 (COMANDO)
+
+
+state 20
+
+    6 COMANDO: CMD_PRINT . ';'
+
+    ';'  shift, and go to state 48
+
+
+state 21
+
+    7 COMANDO: CMD_READ . ';'
+
+    ';'  shift, and go to state 49
+
+
+state 22
+
+   13 COMANDO: COMENT .
+
+    $default  reduce using rule 13 (COMANDO)
+
+
+state 23
+
+    9 COMANDO: ATT_ID . ';'
+
+    ';'  shift, and go to state 50
+
+
+state 24
+
+   10 COMANDO: DECL . ';'
+
+    ';'  shift, and go to state 51
+
+
+state 25
+
+   11 COMANDO: BLOCO .
+
+    $default  reduce using rule 11 (COMANDO)
+
+
+state 26
+
+   18 CMD_FUNC: TIPO . TK_IDENTIFIER '(' LISTA_E ')' BLOCO
+   20 FUNC_DECL: TIPO . TK_IDENTIFIER '(' LISTA_DECL ')' BLOCO
+   28 DECL: TIPO . TK_IDENTIFIER
+   29     | TIPO . TK_IDENTIFIER '=' E
+   30     | TIPO . TK_IDENTIFIER '[' E ']'
+   31     | TIPO . TK_IDENTIFIER '[' E ']' '=' '{' LISTA_E '}'
+
+    TK_IDENTIFIER  shift, and go to state 52
+
+
+state 27
+
+   14 COMANDO: error ';' .
+
+    $default  reduce using rule 14 (COMANDO)
+
+
+state 28
+
+   21 FUNC_DECL: KW_INT KW_MAIN . '(' LISTA_DECL ')' BLOCO
+
+    '('  shift, and go to state 53
+
+
+state 29
+
+   48 E: error .
+
+    $default  reduce using rule 48 (E)
+
+
+state 30
+
+   55 F: TK_IDENTIFIER .
+   58  | TK_IDENTIFIER . '[' E ']'
+
+    '['  shift, and go to state 54
+
+    $default  reduce using rule 55 (F)
+
+
+state 31
+
+   52 F: LIT_INT .
+
+    $default  reduce using rule 52 (F)
+
+
+state 32
+
+   53 F: LIT_CHAR .
+
+    $default  reduce using rule 53 (F)
+
+
+state 33
+
+   54 F: LIT_STRING .
+
+    $default  reduce using rule 54 (F)
+
+
+state 34
+
+   46 E: "~" . E
+
+    error          shift, and go to state 29
+    TK_IDENTIFIER  shift, and go to state 30
+    LIT_INT        shift, and go to state 31
+    LIT_CHAR       shift, and go to state 32
+    LIT_STRING     shift, and go to state 33
+    "~"            shift, and go to state 34
+    '('            shift, and go to state 35
+    "true"         shift, and go to state 36
+    "false"        shift, and go to state 37
+
+    E  go to state 55
+    T  go to state 39
+    F  go to state 40
+
+
+state 35
+
+   56 F: '(' . E ')'
+   57  | '(' . E '=' E ')'
+
+    error          shift, and go to state 29
+    TK_IDENTIFIER  shift, and go to state 30
+    LIT_INT        shift, and go to state 31
+    LIT_CHAR       shift, and go to state 32
+    LIT_STRING     shift, and go to state 33
+    "~"            shift, and go to state 34
+    '('            shift, and go to state 35
+    "true"         shift, and go to state 36
+    "false"        shift, and go to state 37
+
+    E  go to state 56
+    T  go to state 39
+    F  go to state 40
+
+
+state 36
+
+   49 T: "true" .
+
+    $default  reduce using rule 49 (T)
+
+
+state 37
+
+   50 T: "false" .
+
+    $default  reduce using rule 50 (T)
+
+
+state 38
+
+   15 CMD_IF: KW_IF E . KW_THEN BLOCO
+   16       | KW_IF E . KW_THEN BLOCO KW_ELSE BLOCO
+   38 E: E . '>' E
+   39  | E . '<' E
+   40  | E . '+' E
+   41  | E . '-' E
+   42  | E . '*' E
+   43  | E . '/' E
+   44  | E . "||" E
+   45  | E . "&&" E
+
+    KW_THEN  shift, and go to state 57
+    "||"     shift, and go to state 58
+    "&&"     shift, and go to state 59
+    '>'      shift, and go to state 60
+    '<'      shift, and go to state 61
+    '+'      shift, and go to state 62
+    '-'      shift, and go to state 63
+    '*'      shift, and go to state 64
+    '/'      shift, and go to state 65
+
+
+state 39
+
+   47 E: T .
+
+    $default  reduce using rule 47 (E)
+
+
+state 40
+
+   51 T: F .
+
+    $default  reduce using rule 51 (T)
+
+
+state 41
+
+   17 CMD_WHILE: KW_WHILE E . BLOCO
+   38 E: E . '>' E
+   39  | E . '<' E
+   40  | E . '+' E
+   41  | E . '-' E
+   42  | E . '*' E
+   43  | E . '/' E
+   44  | E . "||" E
+   45  | E . "&&" E
+
+    "||"  shift, and go to state 58
+    "&&"  shift, and go to state 59
+    '>'   shift, and go to state 60
+    '<'   shift, and go to state 61
+    '+'   shift, and go to state 62
+    '-'   shift, and go to state 63
+    '*'   shift, and go to state 64
+    '/'   shift, and go to state 65
+    '{'   shift, and go to state 14
+
+    BLOCO  go to state 66
+
+
+state 42
+
+   23 CMD_READ: KW_READ TK_IDENTIFIER .
+
+    $default  reduce using rule 23 (CMD_READ)
+
+
+state 43
+
+   22 CMD_PRINT: KW_PRINT LIT_STRING .
+
+    $default  reduce using rule 22 (CMD_PRINT)
+
+
+state 44
+
+   27 ATT_ID: TK_IDENTIFIER '[' . E ']' '=' E
+
+    error          shift, and go to state 29
+    TK_IDENTIFIER  shift, and go to state 30
+    LIT_INT        shift, and go to state 31
+    LIT_CHAR       shift, and go to state 32
+    LIT_STRING     shift, and go to state 33
+    "~"            shift, and go to state 34
+    '('            shift, and go to state 35
+    "true"         shift, and go to state 36
+    "false"        shift, and go to state 37
+
+    E  go to state 67
+    T  go to state 39
+    F  go to state 40
+
+
+state 45
+
+   19 CMD_FUNC: TK_IDENTIFIER '(' . ')' BLOCO
+
+    ')'  shift, and go to state 68
+
+
+state 46
+
+   26 ATT_ID: TK_IDENTIFIER '=' . E
+
+    error          shift, and go to state 29
+    TK_IDENTIFIER  shift, and go to state 30
+    LIT_INT        shift, and go to state 31
+    LIT_CHAR       shift, and go to state 32
+    LIT_STRING     shift, and go to state 33
+    "~"            shift, and go to state 34
+    '('            shift, and go to state 35
+    "true"         shift, and go to state 36
+    "false"        shift, and go to state 37
+
+    E  go to state 69
+    T  go to state 39
+    F  go to state 40
+
+
+state 47
+
+    2 LISTA_COMANDOS: LISTA_COMANDOS . COMANDO
+   37 BLOCO: '{' LISTA_COMANDOS . '}'
+
+    error          shift, and go to state 4
+    KW_CHAR        shift, and go to state 5
+    KW_INT         shift, and go to state 6
+    KW_IF          shift, and go to state 7
+    KW_WHILE       shift, and go to state 8
+    KW_READ        shift, and go to state 9
+    KW_PRINT       shift, and go to state 10
+    TK_IDENTIFIER  shift, and go to state 11
+    TK_SCOMENT     shift, and go to state 12
+    TK_MCOMENT     shift, and go to state 13
+    '{'            shift, and go to state 14
+    '}'            shift, and go to state 70
+
+    COMANDO    go to state 15
+    CMD_IF     go to state 16
+    CMD_WHILE  go to state 17
+    CMD_FUNC   go to state 18
+    FUNC_DECL  go to state 19
+    CMD_PRINT  go to state 20
+    CMD_READ   go to state 21
+    COMENT     go to state 22
+    ATT_ID     go to state 23
+    DECL       go to state 24
+    BLOCO      go to state 25
+    TIPO       go to state 26
+
+
+state 48
+
+    6 COMANDO: CMD_PRINT ';' .
+
+    $default  reduce using rule 6 (COMANDO)
+
+
+state 49
+
+    7 COMANDO: CMD_READ ';' .
+
+    $default  reduce using rule 7 (COMANDO)
+
+
+state 50
+
+    9 COMANDO: ATT_ID ';' .
+
+    $default  reduce using rule 9 (COMANDO)
+
+
+state 51
+
+   10 COMANDO: DECL ';' .
+
+    $default  reduce using rule 10 (COMANDO)
+
+
+state 52
+
+   18 CMD_FUNC: TIPO TK_IDENTIFIER . '(' LISTA_E ')' BLOCO
+   20 FUNC_DECL: TIPO TK_IDENTIFIER . '(' LISTA_DECL ')' BLOCO
+   28 DECL: TIPO TK_IDENTIFIER .
+   29     | TIPO TK_IDENTIFIER . '=' E
+   30     | TIPO TK_IDENTIFIER . '[' E ']'
+   31     | TIPO TK_IDENTIFIER . '[' E ']' '=' '{' LISTA_E '}'
+
+    '['  shift, and go to state 71
+    '('  shift, and go to state 72
+    '='  shift, and go to state 73
+
+    $default  reduce using rule 28 (DECL)
+
+
+state 53
+
+   21 FUNC_DECL: KW_INT KW_MAIN '(' . LISTA_DECL ')' BLOCO
+
+    KW_CHAR  shift, and go to state 5
+    KW_INT   shift, and go to state 74
+
+    $default  reduce using rule 36 (LISTA_DECL)
+
+    LISTA_DECL  go to state 75
+    TIPO        go to state 76
+
+
+state 54
+
+   58 F: TK_IDENTIFIER '[' . E ']'
+
+    error          shift, and go to state 29
+    TK_IDENTIFIER  shift, and go to state 30
+    LIT_INT        shift, and go to state 31
+    LIT_CHAR       shift, and go to state 32
+    LIT_STRING     shift, and go to state 33
+    "~"            shift, and go to state 34
+    '('            shift, and go to state 35
+    "true"         shift, and go to state 36
+    "false"        shift, and go to state 37
+
+    E  go to state 77
+    T  go to state 39
+    F  go to state 40
+
+
+state 55
+
+   38 E: E . '>' E
+   39  | E . '<' E
+   40  | E . '+' E
+   41  | E . '-' E
+   42  | E . '*' E
+   43  | E . '/' E
+   44  | E . "||" E
+   45  | E . "&&" E
+   46  | "~" E .
+
+    '>'  shift, and go to state 60
+    '<'  shift, and go to state 61
+    '+'  shift, and go to state 62
+    '-'  shift, and go to state 63
+    '*'  shift, and go to state 64
+    '/'  shift, and go to state 65
+
+    $default  reduce using rule 46 (E)
+
+
+state 56
+
+   38 E: E . '>' E
+   39  | E . '<' E
+   40  | E . '+' E
+   41  | E . '-' E
+   42  | E . '*' E
+   43  | E . '/' E
+   44  | E . "||" E
+   45  | E . "&&" E
+   56 F: '(' E . ')'
+   57  | '(' E . '=' E ')'
+
+    "||"  shift, and go to state 58
+    "&&"  shift, and go to state 59
+    '>'   shift, and go to state 60
+    '<'   shift, and go to state 61
+    '+'   shift, and go to state 62
+    '-'   shift, and go to state 63
+    '*'   shift, and go to state 64
+    '/'   shift, and go to state 65
+    ')'   shift, and go to state 78
+    '='   shift, and go to state 79
+
+
+state 57
+
+   15 CMD_IF: KW_IF E KW_THEN . BLOCO
+   16       | KW_IF E KW_THEN . BLOCO KW_ELSE BLOCO
+
+    '{'  shift, and go to state 14
+
+    BLOCO  go to state 80
+
+
+state 58
+
+   44 E: E "||" . E
+
+    error          shift, and go to state 29
+    TK_IDENTIFIER  shift, and go to state 30
+    LIT_INT        shift, and go to state 31
+    LIT_CHAR       shift, and go to state 32
+    LIT_STRING     shift, and go to state 33
+    "~"            shift, and go to state 34
+    '('            shift, and go to state 35
+    "true"         shift, and go to state 36
+    "false"        shift, and go to state 37
+
+    E  go to state 81
+    T  go to state 39
+    F  go to state 40
+
+
+state 59
+
+   45 E: E "&&" . E
+
+    error          shift, and go to state 29
+    TK_IDENTIFIER  shift, and go to state 30
+    LIT_INT        shift, and go to state 31
+    LIT_CHAR       shift, and go to state 32
+    LIT_STRING     shift, and go to state 33
+    "~"            shift, and go to state 34
+    '('            shift, and go to state 35
+    "true"         shift, and go to state 36
+    "false"        shift, and go to state 37
+
+    E  go to state 82
+    T  go to state 39
+    F  go to state 40
+
+
+state 60
+
+   38 E: E '>' . E
+
+    error          shift, and go to state 29
+    TK_IDENTIFIER  shift, and go to state 30
+    LIT_INT        shift, and go to state 31
+    LIT_CHAR       shift, and go to state 32
+    LIT_STRING     shift, and go to state 33
+    "~"            shift, and go to state 34
+    '('            shift, and go to state 35
+    "true"         shift, and go to state 36
+    "false"        shift, and go to state 37
+
+    E  go to state 83
+    T  go to state 39
+    F  go to state 40
+
+
+state 61
+
+   39 E: E '<' . E
+
+    error          shift, and go to state 29
+    TK_IDENTIFIER  shift, and go to state 30
+    LIT_INT        shift, and go to state 31
+    LIT_CHAR       shift, and go to state 32
+    LIT_STRING     shift, and go to state 33
+    "~"            shift, and go to state 34
+    '('            shift, and go to state 35
+    "true"         shift, and go to state 36
+    "false"        shift, and go to state 37
+
+    E  go to state 84
+    T  go to state 39
+    F  go to state 40
+
+
+state 62
+
+   40 E: E '+' . E
+
+    error          shift, and go to state 29
+    TK_IDENTIFIER  shift, and go to state 30
+    LIT_INT        shift, and go to state 31
+    LIT_CHAR       shift, and go to state 32
+    LIT_STRING     shift, and go to state 33
+    "~"            shift, and go to state 34
+    '('            shift, and go to state 35
+    "true"         shift, and go to state 36
+    "false"        shift, and go to state 37
+
+    E  go to state 85
+    T  go to state 39
+    F  go to state 40
+
+
+state 63
+
+   41 E: E '-' . E
+
+    error          shift, and go to state 29
+    TK_IDENTIFIER  shift, and go to state 30
+    LIT_INT        shift, and go to state 31
+    LIT_CHAR       shift, and go to state 32
+    LIT_STRING     shift, and go to state 33
+    "~"            shift, and go to state 34
+    '('            shift, and go to state 35
+    "true"         shift, and go to state 36
+    "false"        shift, and go to state 37
+
+    E  go to state 86
+    T  go to state 39
+    F  go to state 40
+
+
+state 64
+
+   42 E: E '*' . E
+
+    error          shift, and go to state 29
+    TK_IDENTIFIER  shift, and go to state 30
+    LIT_INT        shift, and go to state 31
+    LIT_CHAR       shift, and go to state 32
+    LIT_STRING     shift, and go to state 33
+    "~"            shift, and go to state 34
+    '('            shift, and go to state 35
+    "true"         shift, and go to state 36
+    "false"        shift, and go to state 37
+
+    E  go to state 87
+    T  go to state 39
+    F  go to state 40
+
+
+state 65
+
+   43 E: E '/' . E
+
+    error          shift, and go to state 29
+    TK_IDENTIFIER  shift, and go to state 30
+    LIT_INT        shift, and go to state 31
+    LIT_CHAR       shift, and go to state 32
+    LIT_STRING     shift, and go to state 33
+    "~"            shift, and go to state 34
+    '('            shift, and go to state 35
+    "true"         shift, and go to state 36
+    "false"        shift, and go to state 37
+
+    E  go to state 88
+    T  go to state 39
+    F  go to state 40
+
+
+state 66
+
+   17 CMD_WHILE: KW_WHILE E BLOCO .
+
+    $default  reduce using rule 17 (CMD_WHILE)
+
+
+state 67
+
+   27 ATT_ID: TK_IDENTIFIER '[' E . ']' '=' E
+   38 E: E . '>' E
+   39  | E . '<' E
+   40  | E . '+' E
+   41  | E . '-' E
+   42  | E . '*' E
+   43  | E . '/' E
+   44  | E . "||" E
+   45  | E . "&&" E
+
+    "||"  shift, and go to state 58
+    "&&"  shift, and go to state 59
+    '>'   shift, and go to state 60
+    '<'   shift, and go to state 61
+    '+'   shift, and go to state 62
+    '-'   shift, and go to state 63
+    '*'   shift, and go to state 64
+    '/'   shift, and go to state 65
+    ']'   shift, and go to state 89
+
+
+state 68
+
+   19 CMD_FUNC: TK_IDENTIFIER '(' ')' . BLOCO
+
+    '{'  shift, and go to state 14
+
+    BLOCO  go to state 90
+
+
+state 69
+
+   26 ATT_ID: TK_IDENTIFIER '=' E .
+   38 E: E . '>' E
+   39  | E . '<' E
+   40  | E . '+' E
+   41  | E . '-' E
+   42  | E . '*' E
+   43  | E . '/' E
+   44  | E . "||" E
+   45  | E . "&&" E
+
+    "||"  shift, and go to state 58
+    "&&"  shift, and go to state 59
+    '>'   shift, and go to state 60
+    '<'   shift, and go to state 61
+    '+'   shift, and go to state 62
+    '-'   shift, and go to state 63
+    '*'   shift, and go to state 64
+    '/'   shift, and go to state 65
+
+    $default  reduce using rule 26 (ATT_ID)
+
+
+state 70
+
+   37 BLOCO: '{' LISTA_COMANDOS '}' .
+
+    $default  reduce using rule 37 (BLOCO)
+
+
+state 71
+
+   30 DECL: TIPO TK_IDENTIFIER '[' . E ']'
+   31     | TIPO TK_IDENTIFIER '[' . E ']' '=' '{' LISTA_E '}'
+
+    error          shift, and go to state 29
+    TK_IDENTIFIER  shift, and go to state 30
+    LIT_INT        shift, and go to state 31
+    LIT_CHAR       shift, and go to state 32
+    LIT_STRING     shift, and go to state 33
+    "~"            shift, and go to state 34
+    '('            shift, and go to state 35
+    "true"         shift, and go to state 36
+    "false"        shift, and go to state 37
+
+    E  go to state 91
+    T  go to state 39
+    F  go to state 40
+
+
+state 72
+
+   18 CMD_FUNC: TIPO TK_IDENTIFIER '(' . LISTA_E ')' BLOCO
+   20 FUNC_DECL: TIPO TK_IDENTIFIER '(' . LISTA_DECL ')' BLOCO
+
+    error          shift, and go to state 29
+    KW_CHAR        shift, and go to state 5
+    KW_INT         shift, and go to state 74
+    TK_IDENTIFIER  shift, and go to state 30
+    LIT_INT        shift, and go to state 31
+    LIT_CHAR       shift, and go to state 32
+    LIT_STRING     shift, and go to state 33
+    "~"            shift, and go to state 34
+    '('            shift, and go to state 35
+    "true"         shift, and go to state 36
+    "false"        shift, and go to state 37
+
+    ')'  reduce using rule 36 (LISTA_DECL)
+
+    LISTA_E     go to state 92
+    LISTA_DECL  go to state 93
+    E           go to state 94
+    T           go to state 39
+    F           go to state 40
+    TIPO        go to state 76
+
+
+state 73
+
+   29 DECL: TIPO TK_IDENTIFIER '=' . E
+
+    error          shift, and go to state 29
+    TK_IDENTIFIER  shift, and go to state 30
+    LIT_INT        shift, and go to state 31
+    LIT_CHAR       shift, and go to state 32
+    LIT_STRING     shift, and go to state 33
+    "~"            shift, and go to state 34
+    '('            shift, and go to state 35
+    "true"         shift, and go to state 36
+    "false"        shift, and go to state 37
+
+    E  go to state 95
+    T  go to state 39
+    F  go to state 40
+
+
+state 74
+
+   59 TIPO: KW_INT .
+
+    $default  reduce using rule 59 (TIPO)
+
+
+state 75
+
+   21 FUNC_DECL: KW_INT KW_MAIN '(' LISTA_DECL . ')' BLOCO
+
+    ')'  shift, and go to state 96
+
+
+state 76
+
+   34 LISTA_DECL: TIPO . TK_IDENTIFIER ',' LISTA_DECL
+   35           | TIPO . TK_IDENTIFIER
+
+    TK_IDENTIFIER  shift, and go to state 97
+
+
+state 77
+
+   38 E: E . '>' E
+   39  | E . '<' E
+   40  | E . '+' E
+   41  | E . '-' E
+   42  | E . '*' E
+   43  | E . '/' E
+   44  | E . "||" E
+   45  | E . "&&" E
+   58 F: TK_IDENTIFIER '[' E . ']'
+
+    "||"  shift, and go to state 58
+    "&&"  shift, and go to state 59
+    '>'   shift, and go to state 60
+    '<'   shift, and go to state 61
+    '+'   shift, and go to state 62
+    '-'   shift, and go to state 63
+    '*'   shift, and go to state 64
+    '/'   shift, and go to state 65
+    ']'   shift, and go to state 98
+
+
+state 78
+
+   56 F: '(' E ')' .
+
+    $default  reduce using rule 56 (F)
+
+
+state 79
+
+   57 F: '(' E '=' . E ')'
+
+    error          shift, and go to state 29
+    TK_IDENTIFIER  shift, and go to state 30
+    LIT_INT        shift, and go to state 31
+    LIT_CHAR       shift, and go to state 32
+    LIT_STRING     shift, and go to state 33
+    "~"            shift, and go to state 34
+    '('            shift, and go to state 35
+    "true"         shift, and go to state 36
+    "false"        shift, and go to state 37
+
+    E  go to state 99
+    T  go to state 39
+    F  go to state 40
+
+
+state 80
+
+   15 CMD_IF: KW_IF E KW_THEN BLOCO .
+   16       | KW_IF E KW_THEN BLOCO . KW_ELSE BLOCO
+
+    KW_ELSE  shift, and go to state 100
+
+    $default  reduce using rule 15 (CMD_IF)
+
+
+state 81
+
+   38 E: E . '>' E
+   39  | E . '<' E
+   40  | E . '+' E
+   41  | E . '-' E
+   42  | E . '*' E
+   43  | E . '/' E
+   44  | E . "||" E
+   44  | E "||" E .
+   45  | E . "&&" E
+
+    "&&"  shift, and go to state 59
+    '>'   shift, and go to state 60
+    '<'   shift, and go to state 61
+    '+'   shift, and go to state 62
+    '-'   shift, and go to state 63
+    '*'   shift, and go to state 64
+    '/'   shift, and go to state 65
+
+    $default  reduce using rule 44 (E)
+
+
+state 82
+
+   38 E: E . '>' E
+   39  | E . '<' E
+   40  | E . '+' E
+   41  | E . '-' E
+   42  | E . '*' E
+   43  | E . '/' E
+   44  | E . "||" E
+   45  | E . "&&" E
+   45  | E "&&" E .
+
+    '>'  shift, and go to state 60
+    '<'  shift, and go to state 61
+    '+'  shift, and go to state 62
+    '-'  shift, and go to state 63
+    '*'  shift, and go to state 64
+    '/'  shift, and go to state 65
+
+    $default  reduce using rule 45 (E)
+
+
+state 83
+
+   38 E: E . '>' E
+   38  | E '>' E .
+   39  | E . '<' E
+   40  | E . '+' E
+   41  | E . '-' E
+   42  | E . '*' E
+   43  | E . '/' E
+   44  | E . "||" E
+   45  | E . "&&" E
+
+    '+'  shift, and go to state 62
+    '-'  shift, and go to state 63
+    '*'  shift, and go to state 64
+    '/'  shift, and go to state 65
+
+    $default  reduce using rule 38 (E)
+
+
+state 84
+
+   38 E: E . '>' E
+   39  | E . '<' E
+   39  | E '<' E .
+   40  | E . '+' E
+   41  | E . '-' E
+   42  | E . '*' E
+   43  | E . '/' E
+   44  | E . "||" E
+   45  | E . "&&" E
+
+    '+'  shift, and go to state 62
+    '-'  shift, and go to state 63
+    '*'  shift, and go to state 64
+    '/'  shift, and go to state 65
+
+    $default  reduce using rule 39 (E)
+
+
+state 85
+
+   38 E: E . '>' E
+   39  | E . '<' E
+   40  | E . '+' E
+   40  | E '+' E .
+   41  | E . '-' E
+   42  | E . '*' E
+   43  | E . '/' E
+   44  | E . "||" E
+   45  | E . "&&" E
+
+    '*'  shift, and go to state 64
+    '/'  shift, and go to state 65
+
+    $default  reduce using rule 40 (E)
+
+
+state 86
+
+   38 E: E . '>' E
+   39  | E . '<' E
+   40  | E . '+' E
+   41  | E . '-' E
+   41  | E '-' E .
+   42  | E . '*' E
+   43  | E . '/' E
+   44  | E . "||" E
+   45  | E . "&&" E
+
+    '*'  shift, and go to state 64
+    '/'  shift, and go to state 65
+
+    $default  reduce using rule 41 (E)
+
+
+state 87
+
+   38 E: E . '>' E
+   39  | E . '<' E
+   40  | E . '+' E
+   41  | E . '-' E
+   42  | E . '*' E
+   42  | E '*' E .
+   43  | E . '/' E
+   44  | E . "||" E
+   45  | E . "&&" E
+
+    $default  reduce using rule 42 (E)
+
+
+state 88
+
+   38 E: E . '>' E
+   39  | E . '<' E
+   40  | E . '+' E
+   41  | E . '-' E
+   42  | E . '*' E
+   43  | E . '/' E
+   43  | E '/' E .
+   44  | E . "||" E
+   45  | E . "&&" E
+
+    $default  reduce using rule 43 (E)
+
+
+state 89
+
+   27 ATT_ID: TK_IDENTIFIER '[' E ']' . '=' E
+
+    '='  shift, and go to state 101
+
+
+state 90
+
+   19 CMD_FUNC: TK_IDENTIFIER '(' ')' BLOCO .
+
+    $default  reduce using rule 19 (CMD_FUNC)
+
+
+state 91
+
+   30 DECL: TIPO TK_IDENTIFIER '[' E . ']'
+   31     | TIPO TK_IDENTIFIER '[' E . ']' '=' '{' LISTA_E '}'
+   38 E: E . '>' E
+   39  | E . '<' E
+   40  | E . '+' E
+   41  | E . '-' E
+   42  | E . '*' E
+   43  | E . '/' E
+   44  | E . "||" E
+   45  | E . "&&" E
+
+    "||"  shift, and go to state 58
+    "&&"  shift, and go to state 59
+    '>'   shift, and go to state 60
+    '<'   shift, and go to state 61
+    '+'   shift, and go to state 62
+    '-'   shift, and go to state 63
+    '*'   shift, and go to state 64
+    '/'   shift, and go to state 65
+    ']'   shift, and go to state 102
+
+
+state 92
+
+   18 CMD_FUNC: TIPO TK_IDENTIFIER '(' LISTA_E . ')' BLOCO
+
+    ')'  shift, and go to state 103
+
+
+state 93
+
+   20 FUNC_DECL: TIPO TK_IDENTIFIER '(' LISTA_DECL . ')' BLOCO
+
+    ')'  shift, and go to state 104
+
+
+state 94
+
+   32 LISTA_E: E .
+   33        | E . ',' LISTA_E
+   38 E: E . '>' E
+   39  | E . '<' E
+   40  | E . '+' E
+   41  | E . '-' E
+   42  | E . '*' E
+   43  | E . '/' E
+   44  | E . "||" E
+   45  | E . "&&" E
+
+    "||"  shift, and go to state 58
+    "&&"  shift, and go to state 59
+    '>'   shift, and go to state 60
+    '<'   shift, and go to state 61
+    '+'   shift, and go to state 62
+    '-'   shift, and go to state 63
+    '*'   shift, and go to state 64
+    '/'   shift, and go to state 65
+    ','   shift, and go to state 105
+
+    $default  reduce using rule 32 (LISTA_E)
+
+
+state 95
+
+   29 DECL: TIPO TK_IDENTIFIER '=' E .
+   38 E: E . '>' E
+   39  | E . '<' E
+   40  | E . '+' E
+   41  | E . '-' E
+   42  | E . '*' E
+   43  | E . '/' E
+   44  | E . "||" E
+   45  | E . "&&" E
+
+    "||"  shift, and go to state 58
+    "&&"  shift, and go to state 59
+    '>'   shift, and go to state 60
+    '<'   shift, and go to state 61
+    '+'   shift, and go to state 62
+    '-'   shift, and go to state 63
+    '*'   shift, and go to state 64
+    '/'   shift, and go to state 65
+
+    $default  reduce using rule 29 (DECL)
+
+
+state 96
+
+   21 FUNC_DECL: KW_INT KW_MAIN '(' LISTA_DECL ')' . BLOCO
+
+    '{'  shift, and go to state 14
+
+    BLOCO  go to state 106
+
+
+state 97
+
+   34 LISTA_DECL: TIPO TK_IDENTIFIER . ',' LISTA_DECL
+   35           | TIPO TK_IDENTIFIER .
+
+    ','  shift, and go to state 107
+
+    $default  reduce using rule 35 (LISTA_DECL)
+
+
+state 98
+
+   58 F: TK_IDENTIFIER '[' E ']' .
+
+    $default  reduce using rule 58 (F)
+
+
+state 99
+
+   38 E: E . '>' E
+   39  | E . '<' E
+   40  | E . '+' E
+   41  | E . '-' E
+   42  | E . '*' E
+   43  | E . '/' E
+   44  | E . "||" E
+   45  | E . "&&" E
+   57 F: '(' E '=' E . ')'
+
+    "||"  shift, and go to state 58
+    "&&"  shift, and go to state 59
+    '>'   shift, and go to state 60
+    '<'   shift, and go to state 61
+    '+'   shift, and go to state 62
+    '-'   shift, and go to state 63
+    '*'   shift, and go to state 64
+    '/'   shift, and go to state 65
+    ')'   shift, and go to state 108
+
+
+state 100
+
+   16 CMD_IF: KW_IF E KW_THEN BLOCO KW_ELSE . BLOCO
+
+    '{'  shift, and go to state 14
+
+    BLOCO  go to state 109
+
+
+state 101
+
+   27 ATT_ID: TK_IDENTIFIER '[' E ']' '=' . E
+
+    error          shift, and go to state 29
+    TK_IDENTIFIER  shift, and go to state 30
+    LIT_INT        shift, and go to state 31
+    LIT_CHAR       shift, and go to state 32
+    LIT_STRING     shift, and go to state 33
+    "~"            shift, and go to state 34
+    '('            shift, and go to state 35
+    "true"         shift, and go to state 36
+    "false"        shift, and go to state 37
+
+    E  go to state 110
+    T  go to state 39
+    F  go to state 40
+
+
+state 102
+
+   30 DECL: TIPO TK_IDENTIFIER '[' E ']' .
+   31     | TIPO TK_IDENTIFIER '[' E ']' . '=' '{' LISTA_E '}'
+
+    '='  shift, and go to state 111
+
+    $default  reduce using rule 30 (DECL)
+
+
+state 103
+
+   18 CMD_FUNC: TIPO TK_IDENTIFIER '(' LISTA_E ')' . BLOCO
+
+    '{'  shift, and go to state 14
+
+    BLOCO  go to state 112
+
+
+state 104
+
+   20 FUNC_DECL: TIPO TK_IDENTIFIER '(' LISTA_DECL ')' . BLOCO
+
+    '{'  shift, and go to state 14
+
+    BLOCO  go to state 113
+
+
+state 105
+
+   33 LISTA_E: E ',' . LISTA_E
+
+    error          shift, and go to state 29
+    TK_IDENTIFIER  shift, and go to state 30
+    LIT_INT        shift, and go to state 31
+    LIT_CHAR       shift, and go to state 32
+    LIT_STRING     shift, and go to state 33
+    "~"            shift, and go to state 34
+    '('            shift, and go to state 35
+    "true"         shift, and go to state 36
+    "false"        shift, and go to state 37
+
+    LISTA_E  go to state 114
+    E        go to state 94
+    T        go to state 39
+    F        go to state 40
+
+
+state 106
+
+   21 FUNC_DECL: KW_INT KW_MAIN '(' LISTA_DECL ')' BLOCO .
+
+    $default  reduce using rule 21 (FUNC_DECL)
+
+
+state 107
+
+   34 LISTA_DECL: TIPO TK_IDENTIFIER ',' . LISTA_DECL
+
+    KW_CHAR  shift, and go to state 5
+    KW_INT   shift, and go to state 74
+
+    $default  reduce using rule 36 (LISTA_DECL)
+
+    LISTA_DECL  go to state 115
+    TIPO        go to state 76
+
+
+state 108
+
+   57 F: '(' E '=' E ')' .
+
+    $default  reduce using rule 57 (F)
+
+
+state 109
+
+   16 CMD_IF: KW_IF E KW_THEN BLOCO KW_ELSE BLOCO .
+
+    $default  reduce using rule 16 (CMD_IF)
+
+
+state 110
+
+   27 ATT_ID: TK_IDENTIFIER '[' E ']' '=' E .
+   38 E: E . '>' E
+   39  | E . '<' E
+   40  | E . '+' E
+   41  | E . '-' E
+   42  | E . '*' E
+   43  | E . '/' E
+   44  | E . "||" E
+   45  | E . "&&" E
+
+    "||"  shift, and go to state 58
+    "&&"  shift, and go to state 59
+    '>'   shift, and go to state 60
+    '<'   shift, and go to state 61
+    '+'   shift, and go to state 62
+    '-'   shift, and go to state 63
+    '*'   shift, and go to state 64
+    '/'   shift, and go to state 65
+
+    $default  reduce using rule 27 (ATT_ID)
+
+
+state 111
+
+   31 DECL: TIPO TK_IDENTIFIER '[' E ']' '=' . '{' LISTA_E '}'
+
+    '{'  shift, and go to state 116
+
+
+state 112
+
+   18 CMD_FUNC: TIPO TK_IDENTIFIER '(' LISTA_E ')' BLOCO .
+
+    $default  reduce using rule 18 (CMD_FUNC)
+
+
+state 113
+
+   20 FUNC_DECL: TIPO TK_IDENTIFIER '(' LISTA_DECL ')' BLOCO .
+
+    $default  reduce using rule 20 (FUNC_DECL)
+
+
+state 114
+
+   33 LISTA_E: E ',' LISTA_E .
+
+    $default  reduce using rule 33 (LISTA_E)
+
+
+state 115
+
+   34 LISTA_DECL: TIPO TK_IDENTIFIER ',' LISTA_DECL .
+
+    $default  reduce using rule 34 (LISTA_DECL)
+
+
+state 116
+
+   31 DECL: TIPO TK_IDENTIFIER '[' E ']' '=' '{' . LISTA_E '}'
+
+    error          shift, and go to state 29
+    TK_IDENTIFIER  shift, and go to state 30
+    LIT_INT        shift, and go to state 31
+    LIT_CHAR       shift, and go to state 32
+    LIT_STRING     shift, and go to state 33
+    "~"            shift, and go to state 34
+    '('            shift, and go to state 35
+    "true"         shift, and go to state 36
+    "false"        shift, and go to state 37
+
+    LISTA_E  go to state 117
+    E        go to state 94
+    T        go to state 39
+    F        go to state 40
+
+
+state 117
+
+   31 DECL: TIPO TK_IDENTIFIER '[' E ']' '=' '{' LISTA_E . '}'
+
+    '}'  shift, and go to state 118
+
+
+state 118
+
+   31 DECL: TIPO TK_IDENTIFIER '[' E ']' '=' '{' LISTA_E '}' .
+
+    $default  reduce using rule 31 (DECL)

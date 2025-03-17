@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "token.h"
+#include "parser.tab.h"
 
 extern int yylex();
 extern int yylineno;
@@ -66,7 +66,7 @@ int main(int argc, char *argv[]) {
             case LIT_STRING:
                 printf("LIT_STRING: %d\n", token);
                 break;
-            case TOKEN_ERROR:
+            case TK_ERROR:
                 printf("TOKEN_ERROR: %d\n", token);
                 break;
             case ',':
