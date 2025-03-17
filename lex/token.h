@@ -10,10 +10,10 @@
  * Assim, nao conflitam entre si e com os tokens representados pelo proprio valor ascii de caracteres isolados.
  */
 
-#define KW_CHAR           256
+#define KW_CHAR           
 #define KW_INT            257
 
-#define KW_IF             261
+#define KW_IF             
 #define KW_THEN           262
 #define KW_ELSE           263
 #define KW_WHILE          264

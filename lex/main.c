@@ -1,31 +1,18 @@
 #include <stdio.h>
-#include "token.h"
+#include "parser.tab.h"
 
 extern int yylex();
 extern int yylineno;
-
-int isrunningstatus = 0;
 
 int getLineNumber(void) {
     printf("Total de linhas lidas: %d\n", yylineno);
     return yylineno;  
 }
 
-// Função de verificação de execução
-int isRunning(void){
-    if (yylex() != EOF) {
-        isrunningstatus = 1;
-    } else {isrunningstatus = 0;}
-
-    printf("isRunning: %d\n", isrunningstatus);
-    return isrunningstatus;
-}
-
 int main(int argc, char *argv[]) {
     int token;
 
-    while ((token = yylex()) != EOF) {    
-       
+    while ((token = yylex()) != 0) { // Flex geralmente retorna 0 para EOF
         switch (token) {
             case KW_CHAR:
                 printf("KW_CHAR: %d\n", token);
@@ -129,24 +116,12 @@ int main(int argc, char *argv[]) {
             case '~':
                 printf("TILDE: %d\n", token);
                 break;
-            case 291:
-                printf("Comentario do tipo // ==>  %d\n", token);
-                break;
-            case 292:    
-                printf("Comentario do tipo /**... **/ ==>  %d\n", token);
-                break;
-            case 293:
-                printf("Palavra reservada: %d\n", token);
-                break;
             default:
-                printf("Token desconhecido\n");
+                printf("Token desconhecido: %d\n", token); // Mostra o valor do token
                 break;
         }
-
-
         getLineNumber();
     }
-    
 
     return 0;
 }
