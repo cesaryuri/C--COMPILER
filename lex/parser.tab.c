@@ -76,10 +76,11 @@
 // Protótipos de funções
 void yyerror(const char *s);
 int yylex(void);
+extern int yylineno;  // Importa yylineno do lexer
 
 
 /* Line 189 of yacc.c  */
-#line 83 "parser.tab.c"
+#line 84 "parser.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -137,7 +138,7 @@ typedef int YYSTYPE;
 
 
 /* Line 264 of yacc.c  */
-#line 141 "parser.tab.c"
+#line 142 "parser.tab.c"
 
 #ifdef short
 # undef short
@@ -432,9 +433,9 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    37,    37,    41,    45,    46,    50,    51,    52,    53,
-      54,    58,    62,    63,    67,    71,    75,    79,    83,    84,
-      85,    86,    87,    88,    89,    90,    91,    92,    93,    94
+       0,    34,    34,    38,    42,    43,    47,    48,    49,    50,
+      51,    55,    59,    60,    64,    68,    72,    76,    80,    81,
+      82,    83,    84,    85,    86,    87,    88,    89,    90,    91
 };
 #endif
 
@@ -1383,7 +1384,7 @@ yyreduce:
       
 
 /* Line 1455 of yacc.c  */
-#line 1387 "parser.tab.c"
+#line 1388 "parser.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1595,16 +1596,14 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 97 "parser.y"
+#line 94 "parser.y"
 
 
-// Função principal
 int main(int argc, char **argv) {
     yyparse();
     return 0;
 }
 
-// Função de tratamento de erros
 void yyerror(const char *s) {
-    fprintf(stderr, "Erro: %s\n", s);
+    fprintf(stderr, "Erro de sintaxe na linha %d: %s\n", yylineno, s);
 }

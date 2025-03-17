@@ -5,14 +5,14 @@ extern int yylex();
 extern int yylineno;
 
 int getLineNumber(void) {
-    printf("Total de linhas lidas: %d\n", yylineno);
-    return yylineno;  
+    return yylineno;
 }
 
 int main(int argc, char *argv[]) {
     int token;
+    int error_found = 0;
 
-    while ((token = yylex()) != 0) { // Flex geralmente retorna 0 para EOF
+    while ((token = yylex()) != 0) { // Flex retorna 0 para EOF
         switch (token) {
             case KW_CHAR:
                 printf("KW_CHAR: %d\n", token);
@@ -54,7 +54,8 @@ int main(int argc, char *argv[]) {
                 printf("LIT_STRING: %d\n", token);
                 break;
             case TOKEN_ERROR:
-                printf("TOKEN_ERROR: %d\n", token);
+                printf("Erro lexico encontrado na linha %d: Caractere invalido detectado (TOKEN_ERROR: %d)\n", yylineno, token);
+                error_found = 1;
                 break;
             case ',':
                 printf("COMMA: %d\n", token);
@@ -117,11 +118,16 @@ int main(int argc, char *argv[]) {
                 printf("TILDE: %d\n", token);
                 break;
             default:
-                printf("Token desconhecido: %d\n", token); // Mostra o valor do token
+                printf("Token desconhecido: %d\n", token);
                 break;
         }
-        getLineNumber();
     }
 
-    return 0;
+    if (error_found) {
+        printf("Analise finalizada com erros lexicos.\n");
+        return 1;
+    } else {
+        printf("Analise finalizada com sucesso.\n");
+        return 0;
+    }
 }

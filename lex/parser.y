@@ -5,10 +5,9 @@
 // Protótipos de funções
 void yyerror(const char *s);
 int yylex(void);
+extern int yylineno;  // Importa yylineno do lexer
 %}
 
-// Declarar os tokens sem valores explícitos, usando apenas os nomes
-// O Bison usará os valores definidos em token.h
 %token KW_CHAR
 %token KW_INT
 %token KW_IF
@@ -24,7 +23,6 @@ int yylex(void);
 %token LIT_STRING
 %token TOKEN_ERROR
 
-// Precedência e associatividade de operadores
 %left '+' '-'
 %left '*' '/'
 %left '&' '|'
@@ -32,7 +30,6 @@ int yylex(void);
 
 %%
 
-// Regra inicial
 program:
     function
     ;
@@ -96,13 +93,11 @@ expression:
 
 %%
 
-// Função principal
 int main(int argc, char **argv) {
     yyparse();
     return 0;
 }
 
-// Função de tratamento de erros
 void yyerror(const char *s) {
-    fprintf(stderr, "Erro: %s\n", s);
+    fprintf(stderr, "Erro de sintaxe na linha %d: %s\n", yylineno, s);
 }
