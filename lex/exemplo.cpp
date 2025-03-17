@@ -1,5 +1,5 @@
 // UFRGS - Compiladores - Marcelo Johann - 2024/2 - Draft
-
+int 2 = #2;
 char a = #15;
 char c = 'x';
 char 7 = #100;
