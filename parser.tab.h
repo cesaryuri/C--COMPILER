@@ -48,11 +48,14 @@
      KW_READ = 264,
      KW_PRINT = 265,
      KW_RETURN = 266,
-     TK_IDENTIFIER = 267,
-     LIT_INT = 268,
-     LIT_CHAR = 269,
-     LIT_STRING = 270,
-     TOKEN_ERROR = 271
+     KW_MAIN = 267,
+     TK_IDENTIFIER = 268,
+     LIT_INT = 269,
+     LIT_CHAR = 270,
+     LIT_STRING = 271,
+     TK_ERROR = 272,
+     TK_SCOMENT = 273,
+     TK_MCOMENT = 274
    };
 #endif
 
