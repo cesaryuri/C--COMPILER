@@ -4,15 +4,28 @@
 extern int yylex();
 extern int yylineno;
 
+int isrunningstatus = 0;
+
 int getLineNumber(void) {
-    return yylineno;
+    printf("Total de linhas lidas: %d\n", yylineno);
+    return yylineno;  
+}
+
+// Função de verificação de execução
+int isRunning(void){
+    if (yylex() != EOF) {
+        isrunningstatus = 1;
+    } else {isrunningstatus = 0;}
+
+    printf("isRunning: %d\n", isrunningstatus);
+    return isrunningstatus;
 }
 
 int main(int argc, char *argv[]) {
     int token;
-    int error_found = 0;
 
-    while ((token = yylex()) != 0) { // Flex retorna 0 para EOF
+    while ((token = yylex()) != EOF) {    
+       
         switch (token) {
             case KW_CHAR:
                 printf("KW_CHAR: %d\n", token);
@@ -53,9 +66,8 @@ int main(int argc, char *argv[]) {
             case LIT_STRING:
                 printf("LIT_STRING: %d\n", token);
                 break;
-            case TOKEN_ERROR:
-                printf("Erro lexico encontrado na linha %d: Caractere invalido detectado (TOKEN_ERROR: %d)\n", yylineno, token);
-                error_found = 1;
+            case TK_ERROR:
+                printf("TOKEN_ERROR: %d\n", token);
                 break;
             case ',':
                 printf("COMMA: %d\n", token);
@@ -117,17 +129,24 @@ int main(int argc, char *argv[]) {
             case '~':
                 printf("TILDE: %d\n", token);
                 break;
+            case 291:
+                printf("Comentario do tipo // ==>  %d\n", token);
+                break;
+            case 292:    
+                printf("Comentario do tipo /**... **/ ==>  %d\n", token);
+                break;
+            case 293:
+                printf("Palavra reservada: %d\n", token);
+                break;
             default:
-                printf("Token desconhecido: %d\n", token);
+                printf("Token desconhecido\n");
                 break;
         }
-    }
 
-    if (error_found) {
-        printf("Analise finalizada com erros lexicos.\n");
-        return 1;
-    } else {
-        printf("Analise finalizada com sucesso.\n");
-        return 0;
+
+        getLineNumber();
     }
+    
+
+    return 0;
 }
