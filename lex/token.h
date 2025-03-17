@@ -1,3 +1,5 @@
+#include "parser.tab.h"
+
 /*
  * Compiladores - etapa1 - tokens.h
  *
