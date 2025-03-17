@@ -22,7 +22,7 @@
  #define LIT_INT = 268,
  #define LIT_CHAR = 269,
  #define LIT_STRING = 270,
- #define TOKEN_ERROR = 271,
- #define TOKEN_SCOMENT = 291,
- #define TOKEN_MCOMENT = 292
+ #define TK_ERROR = 271,
+ #define TK_SCOMENT = 291,
+ #define TK_MCOMENT = 292
 /* END OF FILE */
