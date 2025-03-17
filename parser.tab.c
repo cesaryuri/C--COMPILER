@@ -74,23 +74,22 @@
 #include <stdlib.h>
 #include <string.h>
 
-// Protótipos de funções
+// Prototipos de funcoes
 void yyerror(const char *s);
 int yylex(void);
-extern int yylineno;  // Importa yylineno do lexer
+extern int yylineno;
 
-int error_count = 0; // Contador de erros
+int error_count = 0;
 
-// Estrutura para armazenar informações de tipo
 typedef struct {
     char *type; // "int" ou "char"
 } TypeInfo;
 
-#define YYSTYPE TypeInfo // Redefine o tipo padrão do Bison para TypeInfo
+#define YYSTYPE TypeInfo
 
 
 /* Line 189 of yacc.c  */
-#line 94 "parser.tab.c"
+#line 93 "parser.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -151,7 +150,7 @@ typedef int YYSTYPE;
 
 
 /* Line 264 of yacc.c  */
-#line 155 "parser.tab.c"
+#line 154 "parser.tab.c"
 
 #ifdef short
 # undef short
@@ -461,13 +460,13 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,    53,    53,    57,    58,    62,    63,    64,    65,    66,
-      67,    68,    69,    70,    71,    72,    76,    77,    81,    85,
-      86,    90,    91,    95,    99,   103,   104,   108,   114,   123,
-     127,   134,   141,   151,   155,   162,   166,   170,   174,   177,
-     186,   195,   204,   213,   222,   231,   240,   249,   258,   265,
-     266,   267,   274,   275,   276,   277,   278,   279,   286,   296,
-     297
+       0,    52,    52,    56,    57,    61,    62,    63,    64,    65,
+      66,    67,    68,    69,    70,    71,    75,    76,    80,    84,
+      85,    89,    90,    94,    98,   102,   103,   107,   113,   122,
+     126,   133,   140,   150,   154,   161,   165,   169,   173,   176,
+     185,   194,   203,   212,   221,   230,   239,   248,   257,   264,
+     265,   266,   273,   274,   275,   276,   277,   278,   285,   295,
+     296
 };
 #endif
 
@@ -1467,10 +1466,10 @@ yyreduce:
         case 27:
 
 /* Line 1455 of yacc.c  */
-#line 109 "parser.y"
+#line 108 "parser.y"
     {
         if (strcmp((yyvsp[(3) - (3)]).type, "int") != 0) {
-            yyerror("Atribuição inválida: tipo esperado 'int'");
+            yyerror("Atribuicao invalida: tipo esperado 'int'");
         }
     ;}
     break;
@@ -1478,10 +1477,10 @@ yyreduce:
   case 28:
 
 /* Line 1455 of yacc.c  */
-#line 115 "parser.y"
+#line 114 "parser.y"
     {
         if (strcmp((yyvsp[(3) - (6)]).type, "int") != 0 || strcmp((yyvsp[(6) - (6)]).type, "int") != 0) {
-            yyerror("Índice ou valor inválido: tipo esperado 'int'");
+            yyerror("Indice ou valor invalido: tipo esperado 'int'");
         }
     ;}
     break;
@@ -1489,19 +1488,19 @@ yyreduce:
   case 29:
 
 /* Line 1455 of yacc.c  */
-#line 124 "parser.y"
+#line 123 "parser.y"
     {
-        (yyval).type = strdup((yyvsp[(1) - (2)]).type); // Define o tipo da variável
+        (yyval).type = strdup((yyvsp[(1) - (2)]).type); // tipo da variavel
     ;}
     break;
 
   case 30:
 
 /* Line 1455 of yacc.c  */
-#line 128 "parser.y"
+#line 127 "parser.y"
     {
         if (strcmp((yyvsp[(1) - (4)]).type, (yyvsp[(4) - (4)]).type) != 0) {
-            yyerror("Declaração inválida: tipos incompatíveis");
+            yyerror("Declaracao invalida: tipos incompativeis");
         }
         (yyval).type = strdup((yyvsp[(1) - (4)]).type);
     ;}
@@ -1510,10 +1509,10 @@ yyreduce:
   case 31:
 
 /* Line 1455 of yacc.c  */
-#line 135 "parser.y"
+#line 134 "parser.y"
     {
         if (strcmp((yyvsp[(4) - (5)]).type, "int") != 0) {
-            yyerror("Índice de array deve ser 'int'");
+            yyerror("Indice de array deve ser 'int'");
         }
         (yyval).type = strdup((yyvsp[(1) - (5)]).type);
     ;}
@@ -1522,10 +1521,10 @@ yyreduce:
   case 32:
 
 /* Line 1455 of yacc.c  */
-#line 142 "parser.y"
+#line 141 "parser.y"
     {
         if (strcmp((yyvsp[(4) - (9)]).type, "int") != 0) {
-            yyerror("Índice de array deve ser 'int'");
+            yyerror("Indice de array deve ser 'int'");
         }
         (yyval).type = strdup((yyvsp[(1) - (9)]).type);
     ;}
@@ -1534,7 +1533,7 @@ yyreduce:
   case 33:
 
 /* Line 1455 of yacc.c  */
-#line 152 "parser.y"
+#line 151 "parser.y"
     {
         (yyval).type = strdup((yyvsp[(1) - (1)]).type);
     ;}
@@ -1543,7 +1542,7 @@ yyreduce:
   case 34:
 
 /* Line 1455 of yacc.c  */
-#line 156 "parser.y"
+#line 155 "parser.y"
     {
         (yyval).type = strdup((yyvsp[(1) - (3)]).type);
     ;}
@@ -1552,7 +1551,7 @@ yyreduce:
   case 35:
 
 /* Line 1455 of yacc.c  */
-#line 163 "parser.y"
+#line 162 "parser.y"
     {
         (yyval).type = strdup((yyvsp[(1) - (4)]).type);
     ;}
@@ -1561,7 +1560,7 @@ yyreduce:
   case 36:
 
 /* Line 1455 of yacc.c  */
-#line 167 "parser.y"
+#line 166 "parser.y"
     {
         (yyval).type = strdup((yyvsp[(1) - (2)]).type);
     ;}
@@ -1570,11 +1569,11 @@ yyreduce:
   case 39:
 
 /* Line 1455 of yacc.c  */
-#line 178 "parser.y"
+#line 177 "parser.y"
     {
         if (strcmp((yyvsp[(1) - (3)]).type, "int") != 0 || strcmp((yyvsp[(3) - (3)]).type, "int") != 0) {
-            yyerror("Operação '>' requer operandos 'int'");
-            (yyval).type = strdup("int"); // Continua com tipo int para recuperação
+            yyerror("Operacao '>' requer operandos 'int'");
+            (yyval).type = strdup("int"); // Continua com tipo int para recuperacao
         } else {
             (yyval).type = strdup("int");
         }
@@ -1584,10 +1583,10 @@ yyreduce:
   case 40:
 
 /* Line 1455 of yacc.c  */
-#line 187 "parser.y"
+#line 186 "parser.y"
     {
         if (strcmp((yyvsp[(1) - (3)]).type, "int") != 0 || strcmp((yyvsp[(3) - (3)]).type, "int") != 0) {
-            yyerror("Operação '<' requer operandos 'int'");
+            yyerror("Operacao '<' requer operandos 'int'");
             (yyval).type = strdup("int");
         } else {
             (yyval).type = strdup("int");
@@ -1598,10 +1597,10 @@ yyreduce:
   case 41:
 
 /* Line 1455 of yacc.c  */
-#line 196 "parser.y"
+#line 195 "parser.y"
     {
         if (strcmp((yyvsp[(1) - (3)]).type, "int") != 0 || strcmp((yyvsp[(3) - (3)]).type, "int") != 0) {
-            yyerror("Operação '+' requer operandos 'int'");
+            yyerror("Operacao '+' requer operandos 'int'");
             (yyval).type = strdup("int");
         } else {
             (yyval).type = strdup("int");
@@ -1612,10 +1611,10 @@ yyreduce:
   case 42:
 
 /* Line 1455 of yacc.c  */
-#line 205 "parser.y"
+#line 204 "parser.y"
     {
         if (strcmp((yyvsp[(1) - (3)]).type, "int") != 0 || strcmp((yyvsp[(3) - (3)]).type, "int") != 0) {
-            yyerror("Operação '-' requer operandos 'int'");
+            yyerror("Operacao '-' requer operandos 'int'");
             (yyval).type = strdup("int");
         } else {
             (yyval).type = strdup("int");
@@ -1626,10 +1625,10 @@ yyreduce:
   case 43:
 
 /* Line 1455 of yacc.c  */
-#line 214 "parser.y"
+#line 213 "parser.y"
     {
         if (strcmp((yyvsp[(1) - (3)]).type, "int") != 0 || strcmp((yyvsp[(3) - (3)]).type, "int") != 0) {
-            yyerror("Operação '*' requer operandos 'int'");
+            yyerror("Operacao '*' requer operandos 'int'");
             (yyval).type = strdup("int");
         } else {
             (yyval).type = strdup("int");
@@ -1640,10 +1639,10 @@ yyreduce:
   case 44:
 
 /* Line 1455 of yacc.c  */
-#line 223 "parser.y"
+#line 222 "parser.y"
     {
         if (strcmp((yyvsp[(1) - (3)]).type, "int") != 0 || strcmp((yyvsp[(3) - (3)]).type, "int") != 0) {
-            yyerror("Operação '/' requer operandos 'int'");
+            yyerror("Operacao '/' requer operandos 'int'");
             (yyval).type = strdup("int");
         } else {
             (yyval).type = strdup("int");
@@ -1654,10 +1653,10 @@ yyreduce:
   case 45:
 
 /* Line 1455 of yacc.c  */
-#line 232 "parser.y"
+#line 231 "parser.y"
     {
         if (strcmp((yyvsp[(1) - (3)]).type, "int") != 0 || strcmp((yyvsp[(3) - (3)]).type, "int") != 0) {
-            yyerror("Operação '||' requer operandos 'int'");
+            yyerror("Operacao '||' requer operandos 'int'");
             (yyval).type = strdup("int");
         } else {
             (yyval).type = strdup("int");
@@ -1668,10 +1667,10 @@ yyreduce:
   case 46:
 
 /* Line 1455 of yacc.c  */
-#line 241 "parser.y"
+#line 240 "parser.y"
     {
         if (strcmp((yyvsp[(1) - (3)]).type, "int") != 0 || strcmp((yyvsp[(3) - (3)]).type, "int") != 0) {
-            yyerror("Operação '&&' requer operandos 'int'");
+            yyerror("Operacao '&&' requer operandos 'int'");
             (yyval).type = strdup("int");
         } else {
             (yyval).type = strdup("int");
@@ -1682,10 +1681,10 @@ yyreduce:
   case 47:
 
 /* Line 1455 of yacc.c  */
-#line 250 "parser.y"
+#line 249 "parser.y"
     {
         if (strcmp((yyvsp[(2) - (2)]).type, "int") != 0) {
-            yyerror("Operação '~' requer operando 'int'");
+            yyerror("Operacao '~' requer operando 'int'");
             (yyval).type = strdup("int");
         } else {
             (yyval).type = strdup("int");
@@ -1696,7 +1695,7 @@ yyreduce:
   case 48:
 
 /* Line 1455 of yacc.c  */
-#line 259 "parser.y"
+#line 258 "parser.y"
     {
         (yyval).type = strdup((yyvsp[(1) - (1)]).type);
     ;}
@@ -1705,21 +1704,21 @@ yyreduce:
   case 49:
 
 /* Line 1455 of yacc.c  */
-#line 265 "parser.y"
+#line 264 "parser.y"
     { (yyval).type = strdup("int"); ;}
     break;
 
   case 50:
 
 /* Line 1455 of yacc.c  */
-#line 266 "parser.y"
+#line 265 "parser.y"
     { (yyval).type = strdup("int"); ;}
     break;
 
   case 51:
 
 /* Line 1455 of yacc.c  */
-#line 268 "parser.y"
+#line 267 "parser.y"
     {
         (yyval).type = strdup((yyvsp[(1) - (1)]).type);
     ;}
@@ -1728,45 +1727,45 @@ yyreduce:
   case 52:
 
 /* Line 1455 of yacc.c  */
-#line 274 "parser.y"
+#line 273 "parser.y"
     { (yyval).type = strdup("int"); ;}
     break;
 
   case 53:
 
 /* Line 1455 of yacc.c  */
-#line 275 "parser.y"
+#line 274 "parser.y"
     { (yyval).type = strdup("char"); ;}
     break;
 
   case 54:
 
 /* Line 1455 of yacc.c  */
-#line 276 "parser.y"
+#line 275 "parser.y"
     { (yyval).type = strdup("string"); ;}
     break;
 
   case 55:
 
 /* Line 1455 of yacc.c  */
-#line 277 "parser.y"
+#line 276 "parser.y"
     { (yyval).type = strdup("int"); ;}
     break;
 
   case 56:
 
 /* Line 1455 of yacc.c  */
-#line 278 "parser.y"
+#line 277 "parser.y"
     { (yyval).type = strdup((yyvsp[(2) - (3)]).type); ;}
     break;
 
   case 57:
 
 /* Line 1455 of yacc.c  */
-#line 280 "parser.y"
+#line 279 "parser.y"
     {
         if (strcmp((yyvsp[(2) - (5)]).type, (yyvsp[(4) - (5)]).type) != 0) {
-            yyerror("Atribuição em expressão: tipos incompatíveis");
+            yyerror("Atribuicao em expressao: tipos incompativeis");
         }
         (yyval).type = strdup((yyvsp[(2) - (5)]).type);
     ;}
@@ -1775,33 +1774,33 @@ yyreduce:
   case 58:
 
 /* Line 1455 of yacc.c  */
-#line 287 "parser.y"
+#line 286 "parser.y"
     {
         if (strcmp((yyvsp[(3) - (4)]).type, "int") != 0) {
-            yyerror("Índice de array deve ser 'int'");
+            yyerror("Indice de array deve ser 'int'");
         }
-        (yyval).type = strdup("int"); // Assume int para o array (simplificação)
+        (yyval).type = strdup("int"); // int para o array (simplificacao)
     ;}
     break;
 
   case 59:
 
 /* Line 1455 of yacc.c  */
-#line 296 "parser.y"
+#line 295 "parser.y"
     { (yyval).type = strdup("int"); ;}
     break;
 
   case 60:
 
 /* Line 1455 of yacc.c  */
-#line 297 "parser.y"
+#line 296 "parser.y"
     { (yyval).type = strdup("char"); ;}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 1805 "parser.tab.c"
+#line 1804 "parser.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2013,12 +2012,12 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 300 "parser.y"
+#line 299 "parser.y"
 
 
 int main(int argc, char **argv) {
     yyparse();
-    printf("Análise concluída com %d erros.\n", error_count);
+    printf("Analise concluida com %d erros.\n", error_count);
     return 0;
 }
 

@@ -3,19 +3,18 @@
 #include <stdlib.h>
 #include <string.h>
 
-// Protótipos de funções
+// Prototipos de funcoes
 void yyerror(const char *s);
 int yylex(void);
-extern int yylineno;  // Importa yylineno do lexer
+extern int yylineno;
 
-int error_count = 0; // Contador de erros
+int error_count = 0;
 
-// Estrutura para armazenar informações de tipo
 typedef struct {
     char *type; // "int" ou "char"
 } TypeInfo;
 
-#define YYSTYPE TypeInfo // Redefine o tipo padrão do Bison para TypeInfo
+#define YYSTYPE TypeInfo
 %}
 
 %token KW_CHAR
@@ -68,8 +67,8 @@ COMANDO:
     | DECL ';'
     | FUNC_DECL
     | COMENT
-    | error ';'  // Modo pânico: sincroniza no ponto e vírgula
-    | error '}'  // Modo pânico: sincroniza na chave de fechamento
+    | error ';'  // TK de sinc
+    | error '}'  // TK de sinc
     ;
 
 CMD_IF:
@@ -108,13 +107,13 @@ ATT_ID:
     TK_IDENTIFIER '=' E
     {
         if (strcmp($3.type, "int") != 0) {
-            yyerror("Atribuição inválida: tipo esperado 'int'");
+            yyerror("Atribuicao invalida: tipo esperado 'int'");
         }
     }
     | TK_IDENTIFIER '[' E ']' '=' E
     {
         if (strcmp($3.type, "int") != 0 || strcmp($6.type, "int") != 0) {
-            yyerror("Índice ou valor inválido: tipo esperado 'int'");
+            yyerror("Indice ou valor invalido: tipo esperado 'int'");
         }
     }
     ;
@@ -122,26 +121,26 @@ ATT_ID:
 DECL:
     TIPO TK_IDENTIFIER
     {
-        $$.type = strdup($1.type); // Define o tipo da variável
+        $$.type = strdup($1.type); // tipo da variavel
     }
     | TIPO TK_IDENTIFIER '=' E
     {
         if (strcmp($1.type, $4.type) != 0) {
-            yyerror("Declaração inválida: tipos incompatíveis");
+            yyerror("Declaracao invalida: tipos incompativeis");
         }
         $$.type = strdup($1.type);
     }
     | TIPO TK_IDENTIFIER '[' E ']'
     {
         if (strcmp($4.type, "int") != 0) {
-            yyerror("Índice de array deve ser 'int'");
+            yyerror("Indice de array deve ser 'int'");
         }
         $$.type = strdup($1.type);
     }
     | TIPO TK_IDENTIFIER '[' E ']' '=' '{' LISTA_E '}'
     {
         if (strcmp($4.type, "int") != 0) {
-            yyerror("Índice de array deve ser 'int'");
+            yyerror("Indice de array deve ser 'int'");
         }
         $$.type = strdup($1.type);
     }
@@ -177,8 +176,8 @@ BLOCO:
 E:  E '>' E
     {
         if (strcmp($1.type, "int") != 0 || strcmp($3.type, "int") != 0) {
-            yyerror("Operação '>' requer operandos 'int'");
-            $$.type = strdup("int"); // Continua com tipo int para recuperação
+            yyerror("Operacao '>' requer operandos 'int'");
+            $$.type = strdup("int"); // Continua com tipo int para recuperacao
         } else {
             $$.type = strdup("int");
         }
@@ -186,7 +185,7 @@ E:  E '>' E
     | E '<' E
     {
         if (strcmp($1.type, "int") != 0 || strcmp($3.type, "int") != 0) {
-            yyerror("Operação '<' requer operandos 'int'");
+            yyerror("Operacao '<' requer operandos 'int'");
             $$.type = strdup("int");
         } else {
             $$.type = strdup("int");
@@ -195,7 +194,7 @@ E:  E '>' E
     | E '+' E
     {
         if (strcmp($1.type, "int") != 0 || strcmp($3.type, "int") != 0) {
-            yyerror("Operação '+' requer operandos 'int'");
+            yyerror("Operacao '+' requer operandos 'int'");
             $$.type = strdup("int");
         } else {
             $$.type = strdup("int");
@@ -204,7 +203,7 @@ E:  E '>' E
     | E '-' E
     {
         if (strcmp($1.type, "int") != 0 || strcmp($3.type, "int") != 0) {
-            yyerror("Operação '-' requer operandos 'int'");
+            yyerror("Operacao '-' requer operandos 'int'");
             $$.type = strdup("int");
         } else {
             $$.type = strdup("int");
@@ -213,7 +212,7 @@ E:  E '>' E
     | E '*' E
     {
         if (strcmp($1.type, "int") != 0 || strcmp($3.type, "int") != 0) {
-            yyerror("Operação '*' requer operandos 'int'");
+            yyerror("Operacao '*' requer operandos 'int'");
             $$.type = strdup("int");
         } else {
             $$.type = strdup("int");
@@ -222,7 +221,7 @@ E:  E '>' E
     | E '/' E
     {
         if (strcmp($1.type, "int") != 0 || strcmp($3.type, "int") != 0) {
-            yyerror("Operação '/' requer operandos 'int'");
+            yyerror("Operacao '/' requer operandos 'int'");
             $$.type = strdup("int");
         } else {
             $$.type = strdup("int");
@@ -231,7 +230,7 @@ E:  E '>' E
     | E "||" E
     {
         if (strcmp($1.type, "int") != 0 || strcmp($3.type, "int") != 0) {
-            yyerror("Operação '||' requer operandos 'int'");
+            yyerror("Operacao '||' requer operandos 'int'");
             $$.type = strdup("int");
         } else {
             $$.type = strdup("int");
@@ -240,7 +239,7 @@ E:  E '>' E
     | E "&&" E
     {
         if (strcmp($1.type, "int") != 0 || strcmp($3.type, "int") != 0) {
-            yyerror("Operação '&&' requer operandos 'int'");
+            yyerror("Operacao '&&' requer operandos 'int'");
             $$.type = strdup("int");
         } else {
             $$.type = strdup("int");
@@ -249,7 +248,7 @@ E:  E '>' E
     | "~" E
     {
         if (strcmp($2.type, "int") != 0) {
-            yyerror("Operação '~' requer operando 'int'");
+            yyerror("Operacao '~' requer operando 'int'");
             $$.type = strdup("int");
         } else {
             $$.type = strdup("int");
@@ -274,21 +273,21 @@ F:
     LIT_INT { $$.type = strdup("int"); }
     | LIT_CHAR { $$.type = strdup("char"); }
     | LIT_STRING { $$.type = strdup("string"); }
-    | TK_IDENTIFIER { $$.type = strdup("int"); } // Assume int por padrão (simplificação)
+    | TK_IDENTIFIER { $$.type = strdup("int"); } //  int por padrao (simplificacao)
     | '(' E ')' { $$.type = strdup($2.type); }
     | '(' E '=' E ')' 
     {
         if (strcmp($2.type, $4.type) != 0) {
-            yyerror("Atribuição em expressão: tipos incompatíveis");
+            yyerror("Atribuicao em expressao: tipos incompativeis");
         }
         $$.type = strdup($2.type);
     }
     | TK_IDENTIFIER '[' E ']'
     {
         if (strcmp($3.type, "int") != 0) {
-            yyerror("Índice de array deve ser 'int'");
+            yyerror("Indice de array deve ser 'int'");
         }
-        $$.type = strdup("int"); // Assume int para o array (simplificação)
+        $$.type = strdup("int"); // int para o array (simplificacao)
     }
     ;
 
@@ -301,7 +300,7 @@ TIPO:
 
 int main(int argc, char **argv) {
     yyparse();
-    printf("Análise concluída com %d erros.\n", error_count);
+    printf("Analise concluida com %d erros.\n", error_count);
     return 0;
 }
 
