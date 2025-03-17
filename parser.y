@@ -55,7 +55,6 @@ COMANDO:
     | CMD_FUNC 
     | ATT_ID ';' 
     | DECL ';' 
-    | BLOCO
     | FUNC_DECL
     | COMENT
     ;
